@@ -1,21 +1,38 @@
- Subarray with Given Sum (Optimized)
-Problem Statement
-You are given an integer array arr of size n and an integer target.
-Find the total number of continuous subarrays whose sum is equal to target.
-Input Format
-First line: integer n (size of array)
-Second line: n integers
-Third line: integer target
-Output Format
-Print the number of such subarrays.
-Constraints
-1 ≤ n ≤ 2 * 10⁵
--10⁹ ≤ arr[i] ≤ 10⁹
--10⁹ ≤ target ≤ 10⁹
-Example
-Input:
-5  
-1 2 3 -2 2  
+ import java.util.*;
+public class Subarray1 {
+    public static void main(String args[]){
+    
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+
+        for(int i=0;i<n;i++){
+            arr[i] = sc.nextInt();
+
+        }
+        int target = sc.nextInt();
+
+        HashMap<Integer , Integer> map = new HashMap<>();
+
+        int count = 0;
+        int sum = 0;
+        map.put(0,1);
+
+        for(int i =0;i<n;i++){
+            sum = sum + arr[i];
+            int complement = sum - target;
+
+            if(map.containsKey(complement)){
+                count = count + map.get(complement);
+
+            }
+            map.put(sum, map.getOrDefault(sum, 0)+1);
+        }
+        System.out.println(count);
+    }
+}
+-2 2  
 3
 
 Output:
